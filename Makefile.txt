@@ -1,0 +1,37 @@
+
+# code details
+
+EXE_DIR = .
+EXE = $(EXE_DIR)/main
+
+SRC= main.c bookCollection.c registerStudent.c hashthree.c
+
+# generic build details
+
+CC=      cc
+COPT=    -g
+CFLAGS= -lm
+
+# compile to  object code
+
+OBJ= $(SRC:.c=.o)
+
+.c.o:
+	$(CC) $(COPT) -c -o $@ $<
+
+# build executable
+
+$(EXE): $(OBJ)
+	$(CC) $(OBJ) $(CFLAGS) -o $(EXE)
+
+# clean up compilation
+
+clean:
+	rm -f $(OBJ) $(EXE)
+
+# dependencies
+
+main.o:  main.c registerStudent.h librarystructures.h bookCollection.h hashthree.h 
+registerStudent.o: registerStudent.c 
+hashthree.o: hashthree.c
+bookCollection.o: bookCollection.c
